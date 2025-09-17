@@ -1,3 +1,42 @@
+# Challenge: Build a Music Listening Tracker with Monthly Categorization
+
+## Scenario
+You're building a personal music discovery app where users can track albums they've listened to and organize their listening history by month.
+
+## Requirements
+
+### Core Features
+- Create a simple form to input music listening data:
+  - Band/Artist name
+  - Album name  
+  - Release date
+  - Whether you liked it (thumbs up/down or rating)
+- Implement proper form validation and input sanitization to prevent XSS attacks and ensure data integrity
+- Implement a data storage system (can use local storage, state, or mock database)
+- Display the tracked albums in a table/list format categorized by month
+- Group entries by the month of the album's release date (not when added to tracker)
+- Include filtering or sorting options (e.g., by liked/disliked, by artist, chronological)
+- Add a simple dashboard showing listening statistics (total albums, liked vs disliked ratio, most active month, etc.)
+
+### Bonus Features
+- Add the ability to edit or remove entries
+- Include album artwork fetching from a music API
+
+## Security & Data Validation
+- Sanitize all user inputs to prevent malicious code injection
+- Validate date formats and ensure release dates are reasonable (not in the future, not before music existed)
+- Trim whitespace and handle edge cases in text inputs
+- Implement client-side validation with appropriate error messages
+
+## UI Considerations
+- Monthly sections with collapsible/expandable views (organized by release date)
+- Visual indicators for liked vs disliked albums
+- Clean, music-focused design aesthetic
+- Responsive layout for mobile and desktop
+
+## Success Criteria
+Your app should allow users to easily track their music listening habits, provide meaningful insights into their musical preferences over time, and maintain secure, clean data handling practices.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -67,13 +106,5 @@ export default tseslint.config([
   },
 ])
 ```
-
-
-Challenge: Build a Feature-Flagged User Onboarding System
-Scenario: You're building a user onboarding flow for a SaaS application where different user segments should see different onboarding experiences based on feature flags.
-Requirements:
-Create a simple user registration/login system
-Implement 2-3 different onboarding flows (e.g., "basic", "guided", "video-first")
-Use LaunchDarkly to control which users see which onboarding experience
-Include user targeting rules (e.g., by email domain, user role, or random percentage)
-Add a simple dashboard to show which flow a user experienced
+Notes
+Supabase - "Postgres Development Platform" BaaS (backend-as-a-service) solution built on top of PostgreSQL.
