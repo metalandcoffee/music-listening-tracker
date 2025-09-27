@@ -1,22 +1,22 @@
-import { createClient } from "@supabase/supabase-js";
-import { useState, useEffect } from "react";
-import "./App.css";
-import AlbumRatingForm from "./components/AlbumRatingForm";
+/**
+ * Main application component with providers and routing setup
+ */
 
-// Set up Supabase client.
-const { VITE_SUPABASE_URL, VITE_SUPABASE_API_KEY } = import.meta.env;
-const supabase = createClient(VITE_SUPABASE_URL, VITE_SUPABASE_API_KEY);
+import { ChakraProvider as Provider } from '@chakra-ui/react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Toaster } from './components/ui/toaster';
+import AppRoutes from './routes/AppRoutes';
+import { system } from './theme';
 
-export default function App() {
-  useEffect(() => {
-    const fetchGenres = async () => {
-      const { data, error } = await supabase.from("genres").select();
-
-      console.log({ data, error });
-    };
-
-    fetchGenres(); // Don't forget to call the function!
-  }, []);
-
-  return <AlbumRatingForm />;
+function App() {
+  return (
+    <Provider value={system}>
+      <Router>
+        <AppRoutes />
+      </Router>
+      <Toaster />
+    </Provider>
+  );
 }
+
+export default App;
