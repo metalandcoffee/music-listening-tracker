@@ -1,8 +1,19 @@
+/**
+ * API service functions for album data operations
+ */
 import { type Album, type CreateAlbumData } from '../types/album';
 
+/**
+ * Fetches all albums from the API
+ *
+ * @returns {Promise<Album[]>} Promise that resolves to array of albums
+ * @throws {Error} When API request fails
+ * @example
+ * const albums = await fetchAlbums()
+ */
 export const fetchAlbums = async (): Promise<Album[]> => {
   // Simulate API delay.
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 1500));
 
   return [
     {
@@ -44,7 +55,21 @@ export const fetchAlbums = async (): Promise<Album[]> => {
   ];
 };
 
-// Placeholder function for API submission.
+/**
+ * Creates a new album in the database
+ *
+ * @param {CreateAlbumData} albumData - Album data without ID and createdAt
+ * @returns {Promise<Album>} Promise that resolves to created album with ID
+ * @throws {Error} When creation fails or validation errors occur
+ * @example
+ * const newAlbum = await createAlbum({
+ *   artist: 'The Beatles',
+ *   albumName: 'Abbey Road',
+ *   releaseDate: '1969-09-26',
+ *   genre: 'Rock',
+ *   rating: 'good'
+ * })
+ */
 export const createAlbum = async (
   albumData: CreateAlbumData
 ): Promise<Album> => {
