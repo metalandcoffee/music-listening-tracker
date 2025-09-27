@@ -1,6 +1,5 @@
 import { Table, Badge, Box } from '@chakra-ui/react';
 import { type Album } from '../../types/album';
-import { formatDate } from '../../utils/dateUtils';
 
 interface AlbumTableProps {
   albums: Album[];
