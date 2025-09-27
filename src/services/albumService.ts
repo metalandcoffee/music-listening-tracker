@@ -1,7 +1,12 @@
 /**
  * API service functions for album data operations
  */
-import { type Album, type CreateAlbumData } from '../types/album';
+import type { Album, CreateAlbumData, SupabaseAlbum } from '../types/album';
+import { createClient } from '@supabase/supabase-js';
+import { transformSupabaseAlbum } from '../utils/transforms';
+
+const { VITE_SUPABASE_URL, VITE_SUPABASE_API_KEY } = import.meta.env;
+const supabase = createClient(VITE_SUPABASE_URL, VITE_SUPABASE_API_KEY);
 
 /**
  * Fetches all albums from the API
@@ -12,47 +17,19 @@ import { type Album, type CreateAlbumData } from '../types/album';
  * const albums = await fetchAlbums()
  */
 export const fetchAlbums = async (): Promise<Album[]> => {
-  // Simulate API delay.
-  await new Promise((resolve) => setTimeout(resolve, 1500));
+  const { data, error } = await supabase.from('tmp_album_tracking').select();
 
-  return [
-    {
-      id: '1',
-      artist: 'Radiohead',
-      albumName: 'OK Computer',
-      releaseDate: '1997-06-16',
-      genre: 'Alternative Rock',
-      rating: 'good',
-      createdAt: '2024-01-15',
-    },
-    {
-      id: '2',
-      artist: 'Kendrick Lamar',
-      albumName: 'To Pimp a Butterfly',
-      releaseDate: '2015-03-15',
-      genre: 'Hip Hop',
-      rating: 'good',
-      createdAt: '2024-01-14',
-    },
-    {
-      id: '3',
-      artist: 'Taylor Swift',
-      albumName: 'Midnights',
-      releaseDate: '2022-10-21',
-      genre: 'Pop',
-      rating: 'bad',
-      createdAt: '2024-01-13',
-    },
-    {
-      id: '4',
-      artist: 'Pink Floyd',
-      albumName: 'The Dark Side of the Moon',
-      releaseDate: '1973-03-01',
-      genre: 'Progressive Rock',
-      rating: 'good',
-      createdAt: '2024-01-12',
-    },
-  ];
+  if (error) {
+    throw new Error(`Failed to fetch albums: ${error.message}`);
+  }
+
+  if (!data) {
+    return [];
+  }
+
+  const typedData = data as SupabaseAlbum[];
+
+  return typedData.map(transformSupabaseAlbum);
 };
 
 /**
@@ -80,6 +57,7 @@ export const createAlbum = async (
   //   throw new Error('Failed to save album')
   // }
 
+  // @todo USE TRANSFORM FUNCTION transformToSupabaseAlbum
   // Mock sucessful response - replace with actual Supabase insert.
   return {
     ...albumData,

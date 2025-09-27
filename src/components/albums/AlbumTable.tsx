@@ -35,7 +35,7 @@ const AlbumTable = ({ albums }: AlbumTableProps) => {
             <Table.Row key={album.id} _hover={{ bg: 'gray.50' }}>
               <Table.Cell fontWeight='semibold'>{album.artist}</Table.Cell>
               <Table.Cell>{album.albumName}</Table.Cell>
-              <Table.Cell>{formatDate(album.releaseDate)}</Table.Cell>
+              <Table.Cell>{album.releaseDate}</Table.Cell>
               <Table.Cell>
                 <Badge colorPalette='blue' variant='subtle'>
                   {album.genre}
