@@ -15,6 +15,7 @@ const supabase = createClient(VITE_SUPABASE_URL, VITE_SUPABASE_API_KEY);
  * Fetches all albums from the API
  */
 export const fetchAlbums = async (): Promise<Album[]> => {
+  console.log('fetching albums...');
   const { data, error } = await supabase.from('tmp_album_tracking').select();
 
   if (error) {
@@ -32,10 +33,6 @@ export const fetchAlbums = async (): Promise<Album[]> => {
 
 /**
  * Fetches a single album by ID
- *
- * @param {string} id - Album ID to fetch
- * @returns {Promise<Album | null>} Promise that resolves to album or null if not found
- * @throws {Error} When API request fails
  */
 export const fetchAlbumById = async (id: string): Promise<Album | null> => {
   const { data, error } = await supabase
@@ -112,4 +109,18 @@ export const updateAlbum = async (
 
   const typedData = data as SupabaseAlbum;
   return transformSupabaseAlbum(typedData);
+};
+
+/**
+ * Deletes an album from the database
+ */
+export const deleteAlbum = async (id: string): Promise<void> => {
+  const { error } = await supabase
+    .from('tmp_album_tracking')
+    .delete()
+    .eq('id', id);
+
+  if (error) {
+    throw new Error(`Failed to delete album: ${error.message}`);
+  }
 };

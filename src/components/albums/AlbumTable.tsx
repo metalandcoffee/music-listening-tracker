@@ -1,13 +1,31 @@
 import { Table, Badge, Box, HStack, IconButton } from '@chakra-ui/react';
-import { type Album } from '../../types/album';
-import { LuNotebookPen } from 'react-icons/lu';
+import { LuNotebookPen, LuTrash } from 'react-icons/lu';
 import { Link as RouterLink } from 'react-router-dom';
+import { type Album } from '../../types/album';
+import { toaster } from '../ui/toaster';
+import { deleteAlbum } from '../../services/albumService';
 
 interface AlbumTableProps {
   albums: Album[];
+  onAlbumDeleted: (albumId: string) => void;
 }
 
-const AlbumTable = ({ albums }: AlbumTableProps) => {
+const AlbumTable = ({ albums, onAlbumDeleted }: AlbumTableProps) => {
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteAlbum(id);
+      onAlbumDeleted(id);
+      toaster.create({
+        title: 'Album deleted successfully',
+        type: 'success',
+      });
+    } catch (err) {
+      toaster.create({
+        title: 'Failed to delete album',
+        type: 'error',
+      });
+    }
+  };
   return (
     <Box
       bg='white'
@@ -62,6 +80,15 @@ const AlbumTable = ({ albums }: AlbumTableProps) => {
                       <LuNotebookPen />
                     </IconButton>
                   </RouterLink>
+                  <IconButton
+                    aria-label='Delete album'
+                    size='sm'
+                    variant='ghost'
+                    colorPalette='red'
+                    onClick={() => handleDelete(album.id)}
+                  >
+                    <LuTrash />
+                  </IconButton>
                 </HStack>
               </Table.Cell>
             </Table.Row>

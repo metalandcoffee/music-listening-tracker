@@ -8,9 +8,13 @@ Must be logged into Vercel to view the application [here.](https://music-listeni
 
 - **Album List** - View all tracked albums in a clean table
 - **Add Albums** - Form to add new albums with artist, release date, genre, and rating
+- **Album Artwork** - Album Artwork is fetched on add and cached in dB.
 - **Responsive Design** - Works on desktop and mobile
 - **Type Safe** - Full TypeScript implementation
 - **Modern UI** - Built with Chakra UI v3
+- **Local State Management** - Album list updates in-memory after create/update/delete operations
+- **Change Detection** - Edit operations only trigger API calls when form data differs from original values
+- **Reduced Network Requests** - Strategic caching and state updates minimize server communication
 
 ## Tech Stack
 

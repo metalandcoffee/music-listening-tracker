@@ -20,6 +20,7 @@ interface FormData {
 
 interface EditAlbumFormProps {
   album: Album;
+  onAlbumUpdated?: (updatedAlbum: Album) => void;
 }
 
 const EditAlbumForm = ({ album }: EditAlbumFormProps) => {

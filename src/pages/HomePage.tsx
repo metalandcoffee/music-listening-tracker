@@ -7,7 +7,7 @@ import AlbumTable from '../components/albums/AlbumTable';
 import EmptyAlbumState from '../components/albums/EmptyAlbumState';
 
 const HomePage = () => {
-  const { albums, loading, error } = useAlbums();
+  const { albums, loading, error, removeAlbumFromState } = useAlbums();
 
   if (loading) {
     return (
@@ -33,7 +33,7 @@ const HomePage = () => {
         {albums.length === 0 ? (
           <EmptyAlbumState />
         ) : (
-          <AlbumTable albums={albums} />
+          <AlbumTable albums={albums} onAlbumDeleted={removeAlbumFromState} />
         )}
       </VStack>
     </Container>

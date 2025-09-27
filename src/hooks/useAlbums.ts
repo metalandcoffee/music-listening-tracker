@@ -30,5 +30,18 @@ export const useAlbums = () => {
     loadAlbums();
   };
 
-  return { albums, loading, error, refetch };
+  /**
+   * Removes an album from local state after successful API deletion
+   */
+  const removeAlbumFromState = (albumId: string) => {
+    setAlbums((prev) => prev.filter((album) => album.id !== albumId));
+  };
+
+  return {
+    albums,
+    loading,
+    error,
+    removeAlbumFromState,
+    refetch,
+  };
 };
