@@ -8,6 +8,7 @@ import { toaster } from '../../components/ui/toaster';
 import { type CreateAlbumData } from '../../types/album';
 import { createAlbum } from '../../services/albumService';
 import AlbumForm from './AlbumForm';
+import { getAlbumArtwork } from '../../services/artworkService';
 
 interface FormData {
   artist: string;
@@ -26,6 +27,7 @@ const AddAlbumForm = () => {
     rating: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isFetchingArtwork, setIsFetchingArtwork] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
@@ -60,12 +62,21 @@ const AddAlbumForm = () => {
       setIsSubmitting(true);
       setError(null);
 
+      // Fetch artwork while creating the album
+      setIsFetchingArtwork(true);
+      const artwork = await getAlbumArtwork(
+        formData.artist,
+        formData.albumName
+      );
+      setIsFetchingArtwork(false);
+
       const albumData: CreateAlbumData = {
         artist: formData.artist.trim(),
         albumName: formData.albumName.trim(),
         releaseYear: formData.releaseYear,
         genre: formData.genre,
         rating: formData.rating as 'good' | 'bad',
+        artwork: artwork || undefined,
       };
 
       await createAlbum(albumData);
@@ -83,6 +94,7 @@ const AddAlbumForm = () => {
       console.error('Error submitting album:', err);
     } finally {
       setIsSubmitting(false);
+      setIsFetchingArtwork(false);
     }
   };
 
@@ -94,7 +106,9 @@ const AddAlbumForm = () => {
       isSubmitting={isSubmitting}
       error={error}
       submitButtonText='Add Album'
-      loadingText='Adding Album...'
+      loadingText={
+        isFetchingArtwork ? 'Fetching artwork...' : 'Adding Album...'
+      }
     />
   );
 };

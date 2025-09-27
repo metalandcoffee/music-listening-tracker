@@ -4,6 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { type Album } from '../../types/album';
 import { toaster } from '../ui/toaster';
 import { deleteAlbum } from '../../services/albumService';
+import { getDefaultArtwork } from '../../services/artworkService';
 
 interface AlbumTableProps {
   albums: Album[];
@@ -42,6 +43,7 @@ const AlbumTable = ({ albums, onAlbumDeleted }: AlbumTableProps) => {
       <Table.Root variant='outline'>
         <Table.Header bg='teal.50'>
           <Table.Row>
+            <Table.ColumnHeader>Artwork</Table.ColumnHeader>
             <Table.ColumnHeader>Artist</Table.ColumnHeader>
             <Table.ColumnHeader>Album</Table.ColumnHeader>
             <Table.ColumnHeader>Release Date</Table.ColumnHeader>
@@ -53,6 +55,19 @@ const AlbumTable = ({ albums, onAlbumDeleted }: AlbumTableProps) => {
         <Table.Body>
           {albums.map((album) => (
             <Table.Row key={album.id} _hover={{ bg: 'gray.50' }}>
+              <Table.Cell>
+                <img
+                  src={album.artwork || getDefaultArtwork()}
+                  alt={`${album.albumName} cover`}
+                  width='50'
+                  height='50'
+                  style={{
+                    borderRadius: '4px',
+                    objectFit: 'cover',
+                    backgroundColor: '#f7fafc',
+                  }}
+                />
+              </Table.Cell>
               <Table.Cell fontWeight='semibold'>{album.artist}</Table.Cell>
               <Table.Cell>{album.albumName}</Table.Cell>
               <Table.Cell>{album.releaseYear}</Table.Cell>

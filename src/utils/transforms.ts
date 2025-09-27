@@ -12,6 +12,7 @@ export const transformSupabaseAlbum = (
   releaseYear: supabaseAlbum.release_date,
   genre: supabaseAlbum.genre,
   rating: supabaseAlbum.rating,
+  artwork: supabaseAlbum.artwork,
   createdAt: supabaseAlbum.created_at,
 });
 
@@ -24,4 +25,5 @@ export const transformToSupabaseAlbum = (albumData: CreateAlbumData) => ({
   release_date: albumData.releaseYear,
   genre: albumData.genre,
   rating: albumData.rating,
+  artwork: albumData.artwork,
 });

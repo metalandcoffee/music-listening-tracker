@@ -2,7 +2,7 @@
 
 A React app for tracking and rating music albums you've listened to.
 
-Must be logged into Vercel to view the application [here.](https://music-listening-tracker-34im6284u-metalandcoffees-projects.vercel.app/)
+Must be logged into Vercel to view the application [here.](https://music-listening-tracker.vercel.app/)
 
 ## Features
 
@@ -70,7 +70,17 @@ src/
 
 ## API Integration
 
-The app uses placeholder API functions in `src/services/albumService.ts`. Replace these with your backend API calls (Supabase, Firebase, etc.).
+The app integrates with two main services:
+
+**Supabase**
+
+Album storage - All album data stored in Supabase database
+
+**Last.fm API**
+
+Album artwork - Automatically fetches cover art when adding albums
+
+Fallback handling - Graceful degradation when artwork unavailable
 
 ## License
 

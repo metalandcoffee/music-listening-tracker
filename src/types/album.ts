@@ -8,6 +8,7 @@ export interface Album {
   releaseYear: string;
   genre: string;
   rating: 'good' | 'bad';
+  artwork?: string;
   createdAt?: string;
 }
 
@@ -19,6 +20,7 @@ export interface SupabaseAlbum {
   release_date: string;
   genre: string;
   rating: 'good' | 'bad';
+  artwork?: string;
   created_at?: string;
 }
 
