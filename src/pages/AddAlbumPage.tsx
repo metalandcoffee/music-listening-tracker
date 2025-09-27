@@ -1,3 +1,6 @@
+/**
+ * Add album page
+ */
 import { Container, VStack, HStack, Button, Heading } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import { LuArrowLeft } from 'react-icons/lu';
