@@ -31,7 +31,7 @@ Must be logged into Vercel to view the application [here.](https://music-listeni
 
 ```bash
 # Clone the repository
-git clone <your-repo-url>
+git clone git@github.com:metalandcoffee/music-listening-tracker.git
 cd music-listening-tracker
 
 # Install dependencies
