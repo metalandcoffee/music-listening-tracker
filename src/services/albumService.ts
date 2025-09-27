@@ -95,9 +95,6 @@ export const updateAlbum = async (
 ): Promise<Album> => {
   const supabaseUpdates = transformToSupabaseAlbum(updates as CreateAlbumData);
 
-  console.log(supabaseUpdates);
-  console.log('🧁'); // @todo currently getting update to work
-
   const { data, error } = await supabase
     .from('tmp_album_tracking')
     .update(supabaseUpdates)
