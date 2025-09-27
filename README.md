@@ -1,110 +1,73 @@
-# Challenge: Build a Music Listening Tracker with Monthly Categorization
+# Music Listening Tracker
 
-## Scenario
-You're building a personal music discovery app where users can track albums they've listened to and organize their listening history by month.
+A React app for tracking and rating music albums you've listened to.
 
-## Requirements
+Must be logged into Vercel to view the application [here.](https://music-listening-tracker-34im6284u-metalandcoffees-projects.vercel.app/)
 
-### Core Features
-- Create a simple form to input music listening data:
-  - Band/Artist name
-  - Album name  
-  - Release date
-  - Whether you liked it (thumbs up/down or rating)
-- Implement proper form validation and input sanitization to prevent XSS attacks and ensure data integrity
-- Implement a data storage system (can use local storage, state, or mock database)
-- Display the tracked albums in a table/list format categorized by month
-- Group entries by the month of the album's release date (not when added to tracker)
-- Include filtering or sorting options (e.g., by liked/disliked, by artist, chronological)
-- Add a simple dashboard showing listening statistics (total albums, liked vs disliked ratio, most active month, etc.)
+## Features
 
-### Bonus Features
-- Add the ability to edit or remove entries
-- Include album artwork fetching from a music API
+- **Album List** - View all tracked albums in a clean table
+- **Add Albums** - Form to add new albums with artist, release date, genre, and rating
+- **Responsive Design** - Works on desktop and mobile
+- **Type Safe** - Full TypeScript implementation
+- **Modern UI** - Built with Chakra UI v3
 
-## Security & Data Validation
-- Sanitize all user inputs to prevent malicious code injection
-- Validate date formats and ensure release dates are reasonable (not in the future, not before music existed)
-- Trim whitespace and handle edge cases in text inputs
-- Implement client-side validation with appropriate error messages
+## Tech Stack
 
-## UI Considerations
-- Monthly sections with collapsible/expandable views (organized by release date)
-- Visual indicators for liked vs disliked albums
-- Clean, music-focused design aesthetic
-- Responsive layout for mobile and desktop
+- **React 19** - Frontend framework
+- **TypeScript** - Type safety
+- **Chakra UI v3** - Component library
+- **React Router** - Client-side routing
+- **Vite** - Build tool and dev server
 
-## Success Criteria
-Your app should allow users to easily track their music listening habits, provide meaningful insights into their musical preferences over time, and maintain secure, clean data handling practices.
+## Getting Started
 
-# React + TypeScript + Vite
+### Prerequisites
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- Node.js 18+
+- npm or yarn
 
-Currently, two official plugins are available:
+### Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+# Clone the repository
+git clone <your-repo-url>
+cd music-listening-tracker
 
-## Expanding the ESLint configuration
+# Install dependencies
+npm install
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Start development server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Scripts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run typegen      # Generate Chakra UI types
 ```
-Notes
-Supabase - "Postgres Development Platform" BaaS (backend-as-a-service) solution built on top of PostgreSQL.
+
+## Project Structure
+
+```
+src/
+├── components/      # Reusable UI components
+├── pages/          # Page components
+├── hooks/          # Custom React hooks
+├── services/       # API service functions
+├── types/          # TypeScript interfaces
+├── utils/          # Utility functions
+├── constants/      # App constants
+└── theme/          # Chakra UI theme
+```
+
+## API Integration
+
+The app uses placeholder API functions in `src/services/albumService.ts`. Replace these with your backend API calls (Supabase, Firebase, etc.).
+
+## License
+
+MIT
