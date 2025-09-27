@@ -204,7 +204,6 @@ const AddAlbumForm = () => {
                 onChange={(e) => handleInputChange('rating', e.target.value)}
                 placeholder='Select rating'
               >
-                <option value=''>Select rating</option>
                 <option value='good'>Good</option>
                 <option value='bad'>Bad</option>
               </NativeSelectField>
