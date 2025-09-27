@@ -5,7 +5,7 @@ export interface Album {
   id: string;
   artist: string;
   albumName: string;
-  releaseDate: string;
+  releaseYear: string;
   genre: string;
   rating: 'good' | 'bad';
   createdAt?: string;

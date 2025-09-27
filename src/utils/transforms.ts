@@ -9,7 +9,7 @@ export const transformSupabaseAlbum = (
   id: supabaseAlbum.id,
   artist: supabaseAlbum.artist,
   albumName: supabaseAlbum.album,
-  releaseDate: supabaseAlbum.release_date,
+  releaseYear: supabaseAlbum.release_date,
   genre: supabaseAlbum.genre,
   rating: supabaseAlbum.rating,
   createdAt: supabaseAlbum.created_at,
@@ -21,7 +21,7 @@ export const transformSupabaseAlbum = (
 export const transformToSupabaseAlbum = (albumData: CreateAlbumData) => ({
   artist: albumData.artist,
   album: albumData.albumName,
-  release_date: albumData.releaseDate,
+  release_date: albumData.releaseYear,
   genre: albumData.genre,
   rating: albumData.rating,
 });
