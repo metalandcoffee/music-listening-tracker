@@ -1,18 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { type Album } from '../types/album';
 import { fetchAlbums } from '../services/albumService';
 
+let albumsCache: Album[] | null = null;
+let lastFetchTime = 0;
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
 // Custom hook to fetch albums.
 export const useAlbums = () => {
-  const [albums, setAlbums] = useState<Album[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [albums, setAlbums] = useState<Album[]>(albumsCache || []);
+  const [loading, setLoading] = useState(!albumsCache);
   const [error, setError] = useState<string | null>(null);
 
-  const loadAlbums = async () => {
+  const loadAlbums = async (force = false) => {
+    const now = Date.now();
+
+    // Check cache first
+    if (!force && albumsCache && now - lastFetchTime < CACHE_DURATION) {
+      console.log('loading from cache...');
+      setAlbums(albumsCache);
+      setLoading(false);
+      return;
+    }
+
     try {
       setLoading(true);
       setError(null);
       const data = await fetchAlbums();
+
+      // Update cache
+      albumsCache = data;
+      lastFetchTime = now;
       setAlbums(data);
     } catch (err) {
       setError('Failed to load albums');
@@ -30,18 +48,32 @@ export const useAlbums = () => {
     loadAlbums();
   };
 
-  /**
-   * Removes an album from local state after successful API deletion
-   */
+  const updateAlbumInState = (updatedAlbum: Album) => {
+    const updatedAlbums = albums.map((album) =>
+      album.id === updatedAlbum.id ? updatedAlbum : album
+    );
+    setAlbums(updatedAlbums);
+    albumsCache = updatedAlbums;
+  };
   const removeAlbumFromState = (albumId: string) => {
-    setAlbums((prev) => prev.filter((album) => album.id !== albumId));
+    const updatedAlbums = albums.filter((album) => album.id !== albumId);
+    setAlbums(updatedAlbums);
+    albumsCache = updatedAlbums;
+  };
+
+  const addAlbumToState = (newAlbum: Album) => {
+    const updatedAlbums = [newAlbum, ...albums];
+    setAlbums(updatedAlbums);
+    albumsCache = updatedAlbums;
   };
 
   return {
     albums,
     loading,
     error,
-    removeAlbumFromState,
     refetch,
+    updateAlbumInState,
+    removeAlbumFromState,
+    addAlbumToState,
   };
 };
