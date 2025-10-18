@@ -82,6 +82,16 @@ Album artwork - Automatically fetches cover art when adding albums
 
 Fallback handling - Graceful degradation when artwork unavailable
 
+## To-Dos
+
+- Enter custom genre
+- Sort and Filtering
+- Change rating to 5 star system
+- Turn release date into MM/DD/YYYY format
+- Add notes section that shows on hover
+- Add dark mode
+- Do some sort of AI integration
+
 ## License
 
 MIT
