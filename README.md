@@ -4,6 +4,8 @@ A React app for tracking and rating music albums you've listened to.
 
 Must be logged into Vercel to view the application [here.](https://music-listening-tracker.vercel.app/)
 
+![Screenshot](screenshot.png)
+
 ## Features
 
 - **Album List** - View all tracked albums in a clean table
